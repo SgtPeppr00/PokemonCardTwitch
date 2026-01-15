@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pokémon Card Video Component</title>
+    <link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+
+    <div id="pokemon-card-extension">
+        <header class="card-header">
+            <h2 class="title">Current Pull</h2>
+            <button id="close-button" class="close-btn">&times;</button>
+        </header>
+
+        <div class="card-display-container">
+            <img id="active-card-image" 
+                 src="path/to/placeholder/card.png" 
+                 alt="Active Pokémon Card" 
+                 class="active-card">
+        </div>
+
+        <div class="card-info-panel">
+            <p>Set: <span id="card-set">Sword & Shield - Base Set</span></p>
+            <p>Rarity: <span id="card-rarity">Rare Holo</span></p>
+        </div>
+
+        <footer class="card-footer">
+            <button id="details-button" class="action-btn">See Attack Details</button>
+            <button id="claim-button" class="action-btn claim">Claim Card!</button>
+        </footer>
+    </div>
+
+    <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
+
+    <script src="viewer.js"></script>
+</body>
+</html>
