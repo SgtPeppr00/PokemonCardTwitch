@@ -304,7 +304,7 @@ body {
 .type-badge {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Centers content horizontally */
     gap: 10px;
     background: linear-gradient(135deg, 
         rgba(212, 175, 55, 0.3), 
@@ -427,5 +427,9 @@ body {
 }
 
 .tab-button.active {
-    
+    background: var(--frame-gold);
+    color: #1A1A1A;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    border-color: var(--frame-gold);
 }
+

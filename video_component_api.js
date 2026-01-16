@@ -221,6 +221,25 @@ function showPokemon(index) {
     }
 }
 
+function showTab(tabName) {
+    const statsSec = document.getElementById('statsSection');
+    const abilitiesSec = document.getElementById('abilitiesSection');
+    const tabStats = document.getElementById('tabStats');
+    const tabAbilities = document.getElementById('tabAbilities');
+
+    if (tabName === 'stats') {
+        statsSec.style.display = 'block';
+        abilitiesSec.style.display = 'none';
+        tabStats.classList.add('active');
+        tabAbilities.classList.remove('active');
+    } else {
+        statsSec.style.display = 'none';
+        abilitiesSec.style.display = 'block';
+        tabStats.classList.remove('active');
+        tabAbilities.classList.add('active');
+    }
+}
+
 function nextPokemon() {
     currentPokemonIndex = (currentPokemonIndex + 1) % samplePokemon.length;
     showPokemon(currentPokemonIndex);
