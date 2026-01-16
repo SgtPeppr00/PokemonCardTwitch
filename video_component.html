@@ -3,58 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokémon Twitch Extension API</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Bangers&family=Righteous&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="video_component.css">
+    <title>Pokemon Card Overlay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="video_component.css?v=2">
 </head>
 <body>
-    <div class="pokeball-decoration"></div>
-    <div class="pokeball-decoration"></div>
-    <div class="pokeball-decoration"></div>
+    <!-- Pokemon Card Overlay -->
+    <div id="cardOverlay" class="card-overlay">
+        <div class="overlay-backdrop"></div>
+        <div class="overlay-frame">
+            <!-- Close button -->
+            <button class="overlay-close" id="overlayClose">&times;</button>
+            
+            <!-- Card Image -->
+            <div class="overlay-image">
+                <img id="overlayCardImage" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Pokemon">
+                <div class="image-border"></div>
+            </div>
+            
+            <!-- Card Name -->
+            <h2 class="overlay-card-name" id="overlayCardName">Pikachu</h2>
+            
+            <!-- Pokeball Divider -->
+            <div class="pokeball-divider">
+                <div class="pokeball-icon-small"></div>
+            </div>
 
-    <div class="container">
-        <header class="header">
-            <h1 class="title">Pokémon Twitch Extension API</h1>
-            <p class="subtitle">Documentation for the Pokémon-themed Twitch Extension API</p>
-        </header>
+            <div class="tab-container">
+                <button class="tab-button active" id="tabStats" onclick="showTab('stats')">Stats</button>
+                <button class="tab-button" id="tabAbilities" onclick="showTab('abilities')">Type & Abilities</button>
+            </div>
 
-        <div id="connectionStatus" class="connection-status status-loading">
-            Connecting to API...
-        </div>
+            <div id="statsSection">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">HP</div>
+                        <div class="stat-value" id="overlayStat1">60</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">ATK</div>
+                        <div class="stat-value" id="overlayStat2">55</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">DEF</div>
+                        <div class="stat-value" id="overlayStat3">40</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">SP.ATK</div>
+                        <div class="stat-value" id="overlayStat4">50</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">SP.DEF</div>
+                        <div class="stat-value" id="overlayStat5">50</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">SPD</div>
+                        <div class="stat-value" id="overlayStat6">90</div>
+                    </div>
+                </div>
+            </div>
 
-        <div id="statsBar" class="stats-bar">
-            <div class="stat-box">
-                <div class="stat-label">Total Cards</div>
-                <div class="stat-value" id="totalCards">0</div>
+            <div id="abilitiesSection" style="display:none;">
+                <div class="abilities-section">
+                    <div class="type-badge" id="overlayType">
+                        <span class="type-icon">⚡</span>
+                        <span class="type-name">Electric</span>
+                    </div>
+                    <div class="abilities-list" id="overlayAbilities">
+                        <div class="ability-item">
+                            <span class="ability-name">Static</span>
+                            <span class="ability-desc">May paralyze opponents on contact</span>
+                        </div>
+                        <div class="ability-item">
+                            <span class="ability-name">Lightning Rod</span>
+                            <span class="ability-desc">Draws in all Electric-type moves</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="stat-box">
-                <div class="stat-label">Rare Cards</div>
-                <div class="stat-value" id="rareCards">0</div>
+            
+            <!-- Ornamental Divider -->
+            <div class="ornament-divider">
+                <span class="divider-text">Type & Abilities</span>
             </div>
-            <div class="stat-box">
-                <div class="stat-label">Collections</div>
-                <div class="stat-value" id="collectionPercent">0%</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-label">Last Updated</div>
-                <div class="stat-value" id="lastUpdated" style="font-size: 1rem;">--:--</div>
+            
+            <!-- Type & Abilities -->
+            <div class="abilities-section">
+                <div class="type-badge" id="overlayType">
+                    <span class="type-icon">⚡</span>
+                    <span class="type-name">Electric</span>
+                </div>
+                <div class="abilities-list" id="overlayAbilities">
+                    <div class="ability-item">
+                        <span class="ability-name">Static</span>
+                        <span class="ability-desc">May paralyze opponents on contact</span>
+                    </div>
+                    <div class="ability-item">
+                        <span class="ability-name">Lightning Rod</span>
+                        <span class="ability-desc">Draws in all Electric-type moves</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="cardShowcase" class="card-showcase">
-            <div class="loading-spinner">
-                <div class="spinner"></div>
-                <p style="font-family: 'Press Start 2P', cursive; font-size: 0.7rem; color: var(--primary-yellow);">
-                    Loading Pokemon Cards...
-                </p>
-            </div>
-        </div>
-        <footer class="footer">
-            <button class="action-button" id="refreshButton" disabled>
-                Refresh Cards
-            </button>
-        </footer>
     </div>
 
-    <script src="app.js"></script>
+    <script src="video_component_api.js?v=2"></script>
 </body>
 </html>
