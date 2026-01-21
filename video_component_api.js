@@ -4,10 +4,7 @@
 const samplePokemon = [
     {
         name: 'Pikachu',
-        species: 'Electric Mouse Pokemon',
         type: 'Electric',
-        level: 25,
-        rarity: 'Rare Holo',
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
         stats: { hp: 35, attack: 55, defense: 40, spAttack: 50, spDefense: 50, speed: 90 },
         abilities: [
@@ -17,10 +14,7 @@ const samplePokemon = [
     },
     {
         name: 'Charizard',
-        species: 'Flame Pokemon',
         type: 'Fire',
-        level: 36,
-        rarity: 'Holo Rare',
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png',
         stats: { hp: 78, attack: 84, defense: 78, spAttack: 109, spDefense: 85, speed: 100 },
         abilities: [
@@ -30,10 +24,7 @@ const samplePokemon = [
     },
     {
         name: 'Blastoise',
-        species: 'Shellfish Pokemon',
         type: 'Water',
-        level: 36,
-        rarity: 'Rare',
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png',
         stats: { hp: 79, attack: 83, defense: 100, spAttack: 85, spDefense: 105, speed: 78 },
         abilities: [
@@ -43,10 +34,7 @@ const samplePokemon = [
     },
     {
         name: 'Mewtwo',
-        species: 'Genetic Pokemon',
         type: 'Psychic',
-        level: 70,
-        rarity: 'Ultra Rare',
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png',
         stats: { hp: 106, attack: 110, defense: 90, spAttack: 154, spDefense: 90, speed: 130 },
         abilities: [
@@ -56,10 +44,7 @@ const samplePokemon = [
     },
     {
         name: 'Venusaur',
-        species: 'Seed Pokemon',
         type: 'Grass',
-        level: 32,
-        rarity: 'Rare',
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png',
         stats: { hp: 80, attack: 82, defense: 83, spAttack: 100, spDefense: 100, speed: 80 },
         abilities: [
@@ -69,10 +54,7 @@ const samplePokemon = [
     },
     {
         name: 'Gengar',
-        species: 'Shadow Pokemon',
         type: 'Ghost',
-        level: 25,
-        rarity: 'Holo Rare',
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png',
         stats: { hp: 60, attack: 65, defense: 60, spAttack: 130, spDefense: 75, speed: 110 },
         abilities: [
@@ -82,10 +64,7 @@ const samplePokemon = [
     },
     {
         name: 'Dragonite',
-        species: 'Dragon Pokemon',
         type: 'Dragon',
-        level: 55,
-        rarity: 'Ultra Rare',
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png',
         stats: { hp: 91, attack: 134, defense: 95, spAttack: 100, spDefense: 100, speed: 80 },
         abilities: [
@@ -95,10 +74,7 @@ const samplePokemon = [
     },
     {
         name: 'Lucario',
-        species: 'Aura Pokemon',
         type: 'Fighting',
-        level: 30,
-        rarity: 'Rare Holo',
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/448.png',
         stats: { hp: 70, attack: 110, defense: 70, spAttack: 115, spDefense: 70, speed: 90 },
         abilities: [
