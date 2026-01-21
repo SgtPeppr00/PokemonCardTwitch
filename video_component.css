@@ -84,12 +84,6 @@ body {
     }
 }
 
-/* Ornamental borders - REMOVED */
-.ornament-top,
-.ornament-bottom {
-    display: none;
-}
-
 /* Close button */
 .overlay-close {
     position: absolute;
@@ -304,7 +298,7 @@ body {
 .type-badge {
     display: flex;
     align-items: center;
-    justify-content: center; /* Centers content horizontally */
+    justify-content: center;
     gap: 10px;
     background: linear-gradient(135deg, 
         rgba(212, 175, 55, 0.3), 
@@ -314,10 +308,6 @@ body {
     border-radius: 25px;
     margin-bottom: 20px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-}
-
-.type-icon {
-    display: none;
 }
 
 .type-name {

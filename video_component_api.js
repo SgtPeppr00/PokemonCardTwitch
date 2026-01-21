@@ -1,4 +1,4 @@
-// Pokemon Card Overlay - Standalone Demo
+// Pokemon Card Overlay
 
 // Sample Pokemon data
 const samplePokemon = [
@@ -84,29 +84,13 @@ const samplePokemon = [
     }
 ];
 
-let currentPokemonIndex = 0;
+const typeColors = {
+    'Electric': '#FFCB05', 'Fire': '#FF4422', 'Water': '#3399FF',
+    'Grass': '#77CC55', 'Psychic': '#FF5599', 'Fighting': '#BB5544',
+    'Ghost': '#6666BB', 'Dragon': '#7766EE', 'Normal': '#AAAA99'
+}
 
-// Type icons
-const typeIcons = {
-    'Electric': '⚡',
-    'Fire': '🔥',
-    'Water': '💧',
-    'Grass': '🌿',
-    'Psychic': '🔮',
-    'Fighting': '👊',
-    'Dark': '🌙',
-    'Dragon': '🐉',
-    'Fairy': '✨',
-    'Steel': '⚙️',
-    'Normal': '⭐',
-    'Ghost': '👻',
-    'Ice': '❄️',
-    'Poison': '☠️',
-    'Rock': '🪨',
-    'Ground': '🌍',
-    'Bug': '🐛',
-    'Flying': '🦅'
-};
+let currentPokemonIndex = 0;
 
 // Initialize overlay
 function initOverlay() {
@@ -145,48 +129,37 @@ function initOverlay() {
 
 function showPokemon(index) {
     const pokemon = samplePokemon[index];
+
+    const themeColor = typeColors[pokemon.type] || '#D4AF37';
+    document.documentElement.style.setProperty('--type-color', themeColor);
     
-    // Update image
-    const img = document.getElementById('overlayCardImage');
-    if (img) {
-        img.src = pokemon.imageUrl;
-        img.alt = pokemon.name;
-    }
-    
-    // Update name and species
+    // Update image and name
+    document.getElementById('overlayCardImage').src = pokemon.imageUrl;
     document.getElementById('overlayCardName').textContent = pokemon.name;
     
-    // Update stats
-    document.getElementById('overlayStat1').textContent = pokemon.stats.hp;
-    document.getElementById('overlayStat2').textContent = pokemon.stats.attack;
-    document.getElementById('overlayStat3').textContent = pokemon.stats.defense;
-    document.getElementById('overlayStat4').textContent = pokemon.stats.spAttack;
-    document.getElementById('overlayStat5').textContent = pokemon.stats.spDefense;
-    document.getElementById('overlayStat6').textContent = pokemon.stats.speed;
-    
     // Update type
-    const typeIcon = typeIcons[pokemon.type] || '⭐';
     const typeEl = document.getElementById('overlayType');
     if (typeEl) {
-        typeEl.innerHTML = `
-            <span class="type-icon">${typeIcon}</span>
-            <span class="type-name">${pokemon.type}</span>
-        `;
-        console.log('Updated type to:', pokemon.type);
+        typeEl.innerHTML = `<span class="type-name">${pokemon.type}</span>`;
     }
+
+    // Update stats with bars and animation
+    updateStatWithBar('overlayStat1', 'bar1', pokemon.stats.hp, 255);
+    updateStatWithBar('overlayStat2', 'bar2', pokemon.stats.attack, 190);
+    updateStatWithBar('overlayStat3', 'bar3', pokemon.stats.defense, 250);
+    updateStatWithBar('overlayStat4', 'bar4', pokemon.stats.spAttack, 194);
+    updateStatWithBar('overlayStat5', 'bar5', pokemon.stats.spDefense, 250);
+    updateStatWithBar('overlayStat6', 'bar6', pokemon.stats.speed, 180);
     
     // Update abilities
     const abilitiesEl = document.getElementById('overlayAbilities');
-    if (abilitiesEl && pokemon.abilities) {
-        abilitiesEl.innerHTML = pokemon.abilities.map(ability => `
-            <div class="ability-item">
-                <span class="ability-name">${ability.name}</span>
-                <span class="ability-desc">${ability.description}</span>
-            </div>
-        `).join('');
-        console.log('Updated abilities');
-    }
-    
+    abilitiesEl.innerHTML = pokemon.abilities.map(ability => `
+        <div class="ability-item">
+            <span class="ability-name">${ability.name}</span>
+            <span class="ability-desc">${ability.description}</span>
+        </div>
+    `).join('');
+
     // Animate in
     const frame = document.querySelector('.overlay-frame');
     if (frame) {
@@ -195,6 +168,30 @@ function showPokemon(index) {
             frame.style.animation = 'overlayScale 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
         }, 10);
     }
+}
+
+function updateStatWithBar(statId, barId, value, max) {
+    const textEl = document.getElementById(statId);
+    const barEl = document.getElementById(barId);
+    if (!textEl || !barEl) return;
+
+    const percentage = (value / max) * 100;
+
+    // Animate Number
+    let start = 0;
+    const duration = 1000; 
+    const startTime = performance.now();
+
+    function animate(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        textEl.textContent = Math.floor(progress * value);
+        if (progress < 1) requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+
+    if (barEl) barEl.style.width = `${percentage}%`;
+
 }
 
 function showTab(tabName) {
