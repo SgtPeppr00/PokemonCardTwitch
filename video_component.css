@@ -155,6 +155,38 @@ body {
     font-style: italic;
 }
 
+/* Language Toggle */
+.language-toggle {
+    position: absolute;
+    top: 15px;
+    right: 65px;
+    display: flex;
+    gap: 8px;
+    z-index: 1002;
+}
+
+.lang-btn {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--frame-gold);
+    color: var(--frame-gold);
+    padding: 5px 10px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.lang-btn:hover {
+    background: rgba(212, 175, 55, 0.2);
+}
+
+.lang-btn.active {
+    background: var(--frame-gold);
+    color: #1A1A1A;
+}
+
 /* Pokeball Divider */
 .pokeball-divider {
     display: flex;

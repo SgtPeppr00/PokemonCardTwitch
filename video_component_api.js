@@ -3,86 +3,138 @@
 // Sample Pokemon data
 const samplePokemon = [
     {
-        name: 'Pikachu',
-        type: 'Electric',
+        names: { en: 'Pikachu', fr: 'Pikachu' },
+        types: {en: 'Electric', fr: 'Électrik' },
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
         stats: { hp: 35, attack: 55, defense: 40, spAttack: 50, spDefense: 50, speed: 90 },
         abilities: [
-            { name: 'Static', description: 'May paralyze opponents on contact' },
-            { name: 'Lightning Rod', description: 'Draws in all Electric-type moves to boost Sp. Attack' }
+            { 
+                names: { en: 'Static', fr: 'Statik' }, 
+                descs: { en: 'May paralyze opponents', fr: 'Peut paralyser l\'adversaire' } 
+            },
+            { 
+                names: { en: 'Lightning Rod', fr: 'Paratonnerre' }, 
+                descs: { en: 'Draws in Electric moves', fr: 'Attire les capacités Électrik' } 
+            }
         ]
     },
     {
-        name: 'Charizard',
-        type: 'Fire',
+        names: { en: 'Charizard', fr: 'Dracaufeu' },
+        types: {en: 'Fire', fr: 'Feu' },
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png',
         stats: { hp: 78, attack: 84, defense: 78, spAttack: 109, spDefense: 85, speed: 100 },
         abilities: [
-            { name: 'Blaze', description: 'Powers up Fire-type moves when HP is low' },
-            { name: 'Solar Power', description: 'Boosts Sp. Atk in harsh sunlight but loses HP' }
+            {
+                names: { en: 'Blaze', fr: 'Brasier' },
+                descs: { en: 'Powers up Fire-type moves when HP is low', fr: 'Renforce les coups de type Feu quand les PV sont bas' }
+            },
+            {
+                names: { en: 'Solar Power', fr: 'Force Soleil' },
+                descs: { en: 'Boosts Sp. Atk in sunny weather, but HP decreases', fr: 'Augmente l\'Attaque Spéciale par temps ensoleillé, mais les PV diminuent' }
+            }
         ]
     },
     {
-        name: 'Blastoise',
-        type: 'Water',
+        names: { en: 'Blastoise', fr: 'Tortank' },
+        types: {en: 'Water', fr: 'Eau' },
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png',
         stats: { hp: 79, attack: 83, defense: 100, spAttack: 85, spDefense: 105, speed: 78 },
         abilities: [
-            { name: 'Torrent', description: 'Powers up Water-type moves when HP is low' },
-            { name: 'Rain Dish', description: 'Gradually restores HP in rain' }
+            
+            { 
+                names: { en: 'Torrent', fr: 'Torrent' }, 
+                descs: { en: 'Powers up Water-type moves when HP is low', fr: 'Renforce les coups de type Eau quand les PV sont bas' } 
+            },
+            { 
+                names: { en: 'Rain Dish', fr: 'Plaie de pluie' }, 
+                descs: { en: 'Gradually restores HP in rain', fr: 'Restaure progressivement les PV sous la pluie' } 
+            }
         ]
     },
     {
-        name: 'Mewtwo',
-        type: 'Psychic',
+        names: { en: 'Mewtwo', fr: 'Mewtwo' },
+        types: {en: 'Psychic', fr: 'Psykokinesis' },
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png',
         stats: { hp: 106, attack: 110, defense: 90, spAttack: 154, spDefense: 90, speed: 130 },
         abilities: [
-            { name: 'Pressure', description: 'Forces opponents to expend more PP' },
-            { name: 'Unnerve', description: 'Makes opponents too nervous to eat Berries' }
+            { 
+                names: { en: 'Pressure', fr: 'Pression' }, 
+                descs: { en: 'Forces opponents to expend more PP', fr: 'Force les adversaires à dépenser plus de PP' } 
+            },
+            { 
+                names: { en: 'Unnerve', fr: 'Anxiété' }, 
+                descs: { en: 'Makes opponents too nervous to eat Berries', fr: 'Rend les adversaires trop nerveux pour manger des Baies' } 
+            }
         ]
     },
     {
-        name: 'Venusaur',
-        type: 'Grass',
+        names: { en: 'Venusaur', fr: 'Florizarre' },
+        types: {en: 'Grass', fr: 'Plante' },
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png',
         stats: { hp: 80, attack: 82, defense: 83, spAttack: 100, spDefense: 100, speed: 80 },
         abilities: [
-            { name: 'Overgrow', description: 'Powers up Grass-type moves when HP is low' },
-            { name: 'Chlorophyll', description: 'Boosts Speed stat in harsh sunlight' }
+            { 
+                names: { en: 'Overgrow', fr: 'Feuillage' }, 
+                descs: { en: 'Powers up Grass-type moves when HP is low', fr: 'Renforce les coups de type Plante quand les PV sont bas' } 
+            },
+            { 
+                names: { en: 'Chlorophyll', fr: 'Chlorophylle' }, 
+                descs: { en: 'Boosts Speed stat in harsh sunlight', fr: 'Augmente la Vitesse dans un soleil éclatant' } 
+            }
         ]
     },
     {
-        name: 'Gengar',
-        type: 'Ghost',
+        names: { en: 'Gengar', fr: 'Gengar' },
+        types: {en: 'Ghost', fr: 'Spectre' },
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png',
         stats: { hp: 60, attack: 65, defense: 60, spAttack: 130, spDefense: 75, speed: 110 },
         abilities: [
-            { name: 'Cursed Body', description: 'May disable moves that hit the Pokemon' },
-            { name: 'Levitate', description: 'Gives immunity to Ground-type moves' }
+            { 
+                names: { en: 'Cursed Body', fr: 'Corps Maudit' }, 
+                descs: { en: 'May disable moves that hit the Pokemon', fr: 'Peut désactiver les coups qui touchent le Pokemon' } 
+            },
+            { 
+                names: { en: 'Levitate', fr: 'Lévitation' }, 
+                descs: { en: 'Gives immunity to Ground-type moves', fr: 'Donne l\'immunité aux coups de type Sol' } 
+            }
         ]
     },
     {
-        name: 'Dragonite',
-        type: 'Dragon',
+        names: { en: 'Dragonite', fr: 'Dracolosse' },
+        types: {en: 'Dragon', fr: 'Dragon' },
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png',
         stats: { hp: 91, attack: 134, defense: 95, spAttack: 100, spDefense: 100, speed: 80 },
         abilities: [
-            { name: 'Inner Focus', description: 'Prevents the Pokemon from flinching' },
-            { name: 'Multiscale', description: 'Reduces damage when HP is full' }
+            {
+                names: { en: 'Inner Focus', fr: 'Force Intérieure' },
+                descs: { en: 'Prevents the Pokemon from flinching', fr: 'Empêche le Pokemon de reculer' }
+            },
+
+            { 
+                names: { en: 'Multiscale', fr: 'Multiscale' }, 
+                descs: { en: 'Reduces damage when HP is full', fr: 'Réduit les dégâts quand les PV sont pleins' } 
+            }
         ]
     },
     {
-        name: 'Lucario',
-        type: 'Fighting',
+        names: { en: 'Lucario', fr: 'Lucario' },
+        types: {en: 'Fighting', fr: 'Combat' },
         imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/448.png',
         stats: { hp: 70, attack: 110, defense: 70, spAttack: 115, spDefense: 70, speed: 90 },
         abilities: [
-            { name: 'Steadfast', description: 'Boosts Speed when the Pokemon flinches' },
-            { name: 'Inner Focus', description: 'Prevents the Pokemon from flinching' }
+            { 
+                names: { en: 'Steadfast', fr: 'Témérité' }, 
+                descs: { en: 'Boosts Speed when the Pokemon flinches', fr: 'Augmente la Vitesse quand le Pokemon recule' } 
+            },
+            { 
+                names: { en: 'Inner Focus', fr: 'Force Intérieure' }, 
+                descs: { en: 'Prevents the Pokemon from flinching', fr: 'Empêche le Pokemon de reculer' } 
+            }
         ]
     }
 ];
+
+let currentLang = 'en';
 
 const typeColors = {
     'Electric': '#FFCB05', 'Fire': '#FF4422', 'Water': '#3399FF',
@@ -137,7 +189,7 @@ function showPokemon(index) {
     // Update type
     const typeEl = document.getElementById('overlayCardType');
     if (typeEl) {
-        typeEl.innerHTML = `<span class="type-name">${pokemon.type}</span>`;
+        typeEl.innerHTML = `<span class="type-name">${pokemon.types[currentLang]}</span>`;
     }
 
     updateStatValue('overlayStat1', pokemon.stats.hp);
@@ -193,6 +245,21 @@ function nextPokemon() {
 function previousPokemon() {
     currentPokemonIndex = (currentPokemonIndex - 1 + samplePokemon.length) % samplePokemon.length;
     showPokemon(currentPokemonIndex);
+}
+
+function setLanguage(Lang) {
+    currentLang = Lang;
+
+    // Toggle active
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    const activeBtn = Lang === 'en' ? 'langEn' : 'langFr';
+    document.getElementById(activeBtn).classList.add('active');
+
+    // Translate Stat Labels
+    const labels = {
+        'en': ['HP', 'ATK', 'DEF', 'SP.ATK', 'SP. Def', 'SPD'],
+        'fr': ['PV', 'ATK', 'DEF', 'ATK.SP', 'DEF.SP', 'VIT']
+    }
 }
 
 // Initialize when DOM is ready
