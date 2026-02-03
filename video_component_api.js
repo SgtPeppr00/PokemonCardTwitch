@@ -134,6 +134,8 @@ const samplePokemon = [
     }
 ];
 
+// Global State
+let currentPokemonIndex = 0;
 let currentLang = 'en';
 
 const typeColors = {
@@ -141,8 +143,6 @@ const typeColors = {
     'Grass': '#77CC55', 'Psychic': '#FF5599', 'Fighting': '#BB5544',
     'Ghost': '#6666BB', 'Dragon': '#7766EE', 'Normal': '#AAAA99'
 }
-
-let currentPokemonIndex = 0;
 
 // Initialize overlay
 function initOverlay() {
@@ -184,10 +184,10 @@ function showPokemon(index) {
 
     //Update image and name
     document.getElementById('overlayCardImage').src = pokemon.imageUrl;
-    document.getElementById('overlayCardName').textContent = pokemon.name;
+    document.getElementById('overlayCardName').textContent = pokemon.names[currentLang];
 
     // Update type
-    const typeEl = document.getElementById('overlayCardType');
+    const typeEl = document.getElementById('overlayType');
     if (typeEl) {
         typeEl.innerHTML = `<span class="type-name">${pokemon.types[currentLang]}</span>`;
     }
@@ -204,14 +204,14 @@ function showPokemon(index) {
     if (abilitiesEl) {
         abilitiesEl.innerHTML = pokemon.abilities.map(ability => `
             <div class="ability-item">
-                <span class="ability-name">${ability.name}</span>
-                <span class="ability-desc">${ability.description}</span>
+                <span class="ability-name">${ability.names[currentLang]}</span>
+                <span class="ability-desc">${ability.descs[currentLang]}</span>
             </div>
         `).join('');
     }
 }
 
-function updateStatValue(statId, barId, value, max) {
+function updateStatValue(statId, value) {
     const textEl = document.getElementById(statId);
     if (textEl) {
         textEl.textContent = value;
@@ -247,19 +247,26 @@ function previousPokemon() {
     showPokemon(currentPokemonIndex);
 }
 
-function setLanguage(Lang) {
-    currentLang = Lang;
+function setLanguage(lang) {
+    currentLang = lang;
 
     // Toggle active
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-    const activeBtn = Lang === 'en' ? 'langEn' : 'langFr';
+    const activeBtn = lang === 'en' ? 'langEn' : 'langFr';
     document.getElementById(activeBtn).classList.add('active');
 
     // Translate Stat Labels
     const labels = {
         'en': ['HP', 'ATK', 'DEF', 'SP.ATK', 'SP. Def', 'SPD'],
-        'fr': ['PV', 'ATK', 'DEF', 'ATK.SP', 'DEF.SP', 'VIT']
+        'fr': ['PV', 'ATQ', 'DEF', 'ATK.SP', 'DEF.SP', 'VIT']
     }
+
+    const labelElements = document.querySelectorAll('.stat-label');
+    labelElements.forEach((el, idx) => {
+        el.textContent = labels[lang][idx];
+    })
+
+    showPokemon(currentPokemonIndex);
 }
 
 // Initialize when DOM is ready

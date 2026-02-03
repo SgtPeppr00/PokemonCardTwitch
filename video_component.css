@@ -158,11 +158,11 @@ body {
 /* Language Toggle */
 .language-toggle {
     position: absolute;
-    top: 15px;
-    right: 65px;
+    top: 20px;
+    right: 70px;
     display: flex;
-    gap: 8px;
-    z-index: 1002;
+    gap: 5px;
+    z-index: 20;
 }
 
 .lang-btn {
