@@ -192,13 +192,6 @@ function showPokemon(index) {
         typeEl.innerHTML = `<span class="type-name">${pokemon.types[currentLang]}</span>`;
     }
 
-    updateStatValue('overlayStat1', pokemon.stats.hp);
-    updateStatValue('overlayStat2', pokemon.stats.attack);
-    updateStatValue('overlayStat3', pokemon.stats.defense);
-    updateStatValue('overlayStat4', pokemon.stats.spAttack);
-    updateStatValue('overlayStat5', pokemon.stats.spDefense);
-    updateStatValue('overlayStat6', pokemon.stats.speed);
-
     // Update abilities
     const abilitiesEl = document.getElementById('overlayAbilities');
     if (abilitiesEl) {
@@ -209,6 +202,13 @@ function showPokemon(index) {
             </div>
         `).join('');
     }
+
+    updateStatValue('overlayStat1', pokemon.stats.hp);
+    updateStatValue('overlayStat2', pokemon.stats.attack);
+    updateStatValue('overlayStat3', pokemon.stats.defense);
+    updateStatValue('overlayStat4', pokemon.stats.spAttack);
+    updateStatValue('overlayStat5', pokemon.stats.spDefense);
+    updateStatValue('overlayStat6', pokemon.stats.speed);
 }
 
 function updateStatValue(statId, value) {
@@ -261,6 +261,19 @@ function setLanguage(lang) {
         'fr': ['PV', 'ATQ', 'DEF', 'ATK.SP', 'DEF.SP', 'VIT']
     }
 
+    // Translate Type and Abilities Button
+    const typeBtn = {
+        'en': 'Type and Abilities',
+        'fr': 'Type et Capacités'
+    }
+
+    const tabAbilities = document.getElementById('tabAbilities');
+    if (tabAbilities) {
+        tabAbilities.textContent = typeBtn[lang];
+    }
+
+
+
     const labelElements = document.querySelectorAll('.stat-label');
     labelElements.forEach((el, idx) => {
         el.textContent = labels[lang][idx];
@@ -278,8 +291,9 @@ if (document.readyState === 'loading') {
 
 // Show instructions after 1 second
 setTimeout(() => {
-    console.log('%c Pokemon Card Overlay Demo', 'font-size: 20px; font-weight: bold; color: #FFCB05;');
+    console.log('%c Pokemon TCG Overlay', 'font-size: 20px; font-weight: bold; color: #FFCB05;');
     console.log('%c→ Click anywhere to see next Pokemon', 'font-size: 14px; color: #D4AF37;');
     console.log('%c← Use arrow keys to navigate', 'font-size: 14px; color: #D4AF37;');
     console.log('%c✕ Click X button for next card', 'font-size: 14px; color: #D4AF37;');
 }, 1000);
+
