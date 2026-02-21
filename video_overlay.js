@@ -1,5 +1,29 @@
 // Pokemon Card Overlay
 
+// ========== TWITCH LIVE DETECTION ==========
+function setupTwitchLiveDetection() {
+    if (!window.Twitch || !window.Twitch.ext) return;
+
+    window.Twitch.ext.onAuthorized(function(auth) {
+        console.log('Twitch Extension authorized.');
+    });
+
+    window.Twitch.ext.onContext(function(context) {
+        const overlay = document.getElementById('cardOverlay');
+        if (!overlay) return;
+
+        // hlsLatencyBroadcaster is only present when the stream is live
+        if (context.hlsLatencyBroadcaster !== undefined) {
+            overlay.style.display = 'flex';
+        } else {
+            overlay.style.display = 'none';
+        }
+    });
+}
+
+setupTwitchLiveDetection();
+// ===========================================
+
 // Sample Pokemon data
 const samplePokemon = [
     {
@@ -138,23 +162,8 @@ const samplePokemon = [
 let currentPokemonIndex = 0;
 let currentLang = 'en';
 
-const typeColors = {
-    'Electric': '#FFCB05', 'Fire': '#FF4422', 'Water': '#3399FF',
-    'Grass': '#77CC55', 'Psychic': '#FF5599', 'Fighting': '#BB5544',
-    'Ghost': '#6666BB', 'Dragon': '#7766EE', 'Normal': '#AAAA99'
-}
-
 // Initialize overlay
 function initOverlay() {
-    const hitboxLayer = document.createElement('div');
-    hitboxLayer.id = 'videoHitboxLayer';
-    Object.assign(hitboxLayer.style, {
-        position: 'fixed', top: '0', left: '0', width: '100%', height: '100%', 
-        zIndex: '500', pointerEvents: 'none'
-    })
-
-
-
     const closeBtn = document.getElementById('overlayClose');
     const overlay = document.getElementById('cardOverlay');
     const backdrop = document.querySelector('.overlay-backdrop');
@@ -299,12 +308,4 @@ setTimeout(() => {
     console.log('%c✕ Click X button for next card', 'font-size: 14px; color: #D4AF37;');
 }, 1000);
 
-const mockScannerResults = [
-    { name: 'Pikachu', x: 42, y: 32, w: 16, h: 24}, // Active Spot
-    { name: 'Charizard', x: 12, y: 62, w: 14, h: 22}, // Bench 1
-    { name: 'Blastoise', x: 27, y: 62, w: 14, h: 22}, // Bench 2
-    { name: 'Mewtwo', x: 42, y: 62, w: 14, h: 22}, // Bench 3
-    { name: 'Venusaur', x: 57, y: 62, w: 14, h: 22}, // Bench 4
-    { name: 'Gengar', x: 72, y: 62, w: 14, h: 22}, // Bench 5
-]
 
