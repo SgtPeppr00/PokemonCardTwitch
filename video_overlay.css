@@ -3,44 +3,29 @@
    Twitch Video Overlay Extension
    ════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Rajdhani:wght@400;600&display=swap');
 
 :root {
-    --gold:        #D4AF37;
-    --gold-light:  #F0D060;
-    --gold-dim:    rgba(212, 175, 55, 0.35);
-    --bronze:      #8B6F47;
-    --red:         #E8392A;
-    --red-glow:    rgba(232, 57, 42, 0.5);
-    --blue-dark:   rgba(8, 12, 30, 0.92);
-    --panel-bg:    rgba(10, 10, 22, 0.91);
-    --white-dim:   rgba(255,255,255,0.75);
+    --gold:      #D4AF37;
+    --gold-dim:  rgba(212,175,55,0.35);
+    --panel-bg:  rgba(10,10,22,0.91);
     --font-display: 'Cinzel', serif;
     --font-body:    'Rajdhani', sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* CRITICAL: Transparent body for Twitch overlay */
+/* Transparent body — required for Twitch overlay */
 body {
-<<<<<<< HEAD
     background: transparent !important;
     width: 100vw;
     height: 100vh;
-=======
-    background: transparent;
-    min-height: 100vh;
-    font-family: 'Cinzel', serif;
->>>>>>> 77de7fa4dab9259aa40bc4894a4f0a6b30e37cf8
     overflow: hidden;
     pointer-events: none;
     font-family: var(--font-body);
 }
 
-/* ════════════════════════════════════════════════════
-   PLAYER PANELS
-   ════════════════════════════════════════════════════ */
-
+/* ── Player Panels ── */
 .player-panel {
     position: fixed;
     top: 0;
@@ -48,20 +33,14 @@ body {
     width: 240px;
     pointer-events: all;
     display: flex;
-<<<<<<< HEAD
     align-items: center;
-=======
-    align-items: flex-start;
-    justify-content: flex-end;
-    z-index: 1000;
-    opacity: 1;
-    animation: fadeIn 0.3s ease-out;
-    pointer-events: none;
->>>>>>> 77de7fa4dab9259aa40bc4894a4f0a6b30e37cf8
 }
 
-.panel-left  { left: 0; }
-.panel-right { right: 0; }
+.panel-left  { left: 0;  animation: slideInLeft  0.6s cubic-bezier(0.175,0.885,0.32,1.1) both; }
+.panel-right { right: 0; animation: slideInRight 0.6s cubic-bezier(0.175,0.885,0.32,1.1) 0.1s both; }
+
+@keyframes slideInLeft  { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes slideInRight { from { transform: translateX(100%);  opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
 .panel-inner {
     position: relative;
@@ -79,46 +58,30 @@ body {
     backdrop-filter: blur(14px);
 }
 
-<<<<<<< HEAD
-/* Left panel: rounded right corners, flush left */
-.panel-left .panel-inner {
-    border-left: none;
-    border-radius: 0 16px 16px 0;
-    border-right: 2px solid var(--gold);
-    box-shadow:
-        4px 0 40px rgba(0,0,0,0.6),
-        inset -1px 0 0 rgba(212,175,55,0.1);
-}
-
-/* Right panel: rounded left corners, flush right */
-.panel-right .panel-inner {
-    border-right: none;
-    border-radius: 16px 0 0 16px;
-    border-left: 2px solid var(--gold);
-    box-shadow:
-        -4px 0 40px rgba(0,0,0,0.6),
-        inset 1px 0 0 rgba(212,175,55,0.1);
-}
-
-/* Shimmer line at top */
-.panel-left .panel-inner::before,
-.panel-right .panel-inner::before {
+.panel-inner::before {
     content: '';
-=======
-.overlay-backdrop {
->>>>>>> 77de7fa4dab9259aa40bc4894a4f0a6b30e37cf8
     position: absolute;
-    top: 0;
-    left: 0; right: 0;
+    top: 0; left: 0; right: 0;
     height: 2px;
     background: linear-gradient(90deg, transparent, var(--gold), transparent);
     opacity: 0.6;
 }
 
-/* ════════════════════════════════════════════════════
-   CORNER ACCENTS
-   ════════════════════════════════════════════════════ */
+.panel-left .panel-inner {
+    border-left: none;
+    border-radius: 0 16px 16px 0;
+    border-right: 2px solid var(--gold);
+    box-shadow: 4px 0 40px rgba(0,0,0,0.6), inset -1px 0 0 rgba(212,175,55,0.1);
+}
 
+.panel-right .panel-inner {
+    border-right: none;
+    border-radius: 16px 0 0 16px;
+    border-left: 2px solid var(--gold);
+    box-shadow: -4px 0 40px rgba(0,0,0,0.6), inset 1px 0 0 rgba(212,175,55,0.1);
+}
+
+/* ── Corner Accents ── */
 .corner-tl, .corner-bl, .corner-tr, .corner-br {
     position: absolute;
     width: 16px;
@@ -127,27 +90,22 @@ body {
     border-style: solid;
     opacity: 0.8;
 }
-
-.corner-tl { top: 6px; left: 6px;   border-width: 2px 0 0 2px; }
-.corner-bl { bottom: 6px; left: 6px; border-width: 0 0 2px 2px; }
-.corner-tr { top: 6px; right: 6px;  border-width: 2px 2px 0 0; }
+.corner-tl { top: 6px;    left: 6px;  border-width: 2px 0 0 2px; }
+.corner-bl { bottom: 6px; left: 6px;  border-width: 0 0 2px 2px; }
+.corner-tr { top: 6px;    right: 6px; border-width: 2px 2px 0 0; }
 .corner-br { bottom: 6px; right: 6px; border-width: 0 2px 2px 0; }
 
-/* ════════════════════════════════════════════════════
-   PLAYER BADGE
-   ════════════════════════════════════════════════════ */
-
+/* ── Player Badge ── */
 .player-badge {
     position: absolute;
     top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
     background: var(--gold);
     padding: 4px 14px 5px;
     clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
     z-index: 10;
 }
-
-.badge-left  { left: 50%; transform: translateX(-50%); }
-.badge-right { left: 50%; transform: translateX(-50%); }
 
 .badge-label {
     font-family: var(--font-display);
@@ -157,265 +115,7 @@ body {
     letter-spacing: 3px;
 }
 
-/* ════════════════════════════════════════════════════
-   AVATAR
-   ════════════════════════════════════════════════════ */
-
-.avatar-wrap {
-    position: relative;
-    width: 80px;
-    height: 80px;
-    margin-top: 10px;
-    flex-shrink: 0;
-}
-
-.avatar-ring {
-    position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    border: 2px solid var(--gold-dim);
-    animation: spin-slow 8s linear infinite;
-}
-
-.ring-gold {
-    border-color: var(--gold);
-    border-top-color: transparent;
-    border-bottom-color: transparent;
-}
-
-@keyframes spin-slow {
-    to { transform: rotate(360deg); }
-}
-
-.avatar {
-    width: 100%;
-    height: 100%;
-<<<<<<< HEAD
-=======
-    background: transparent;
-    pointer-events: none;
-}
-
-.overlay-frame {
-    position: relative;
-    background: rgba(26, 26, 46, 0.95);
-    border: 4px solid var(--frame-gold);
-    border-radius: 20px;
-    width: 90%;
-    max-width: 500px;
-    padding: 20px;
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-    z-index: 1001;
-    overflow: hidden;
-    pointer-events: all;
-    margin: 20px 20px 0 0;
-}
-
-@keyframes overlayScale {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Close button */
-.overlay-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(139, 111, 71, 0.5);
-    border: 2px solid var(--frame-gold);
-    color: var(--frame-gold);
-    font-size: 2rem;
-    width: 45px;
-    height: 45px;
->>>>>>> 77de7fa4dab9259aa40bc4894a4f0a6b30e37cf8
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid var(--gold);
-    background: radial-gradient(circle at 40% 35%, rgba(212,175,55,0.15), rgba(0,0,0,0.6));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.avatar img {
-    width: 86%;
-    height: 86%;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
-}
-
-.avatar-glow {
-    position: absolute;
-    inset: -8px;
-    border-radius: 50%;
-    pointer-events: none;
-}
-
-.glow-gold { box-shadow: 0 0 18px 2px rgba(212,175,55,0.3); }
-.glow-red  { box-shadow: 0 0 18px 2px rgba(232,57,42,0.3); }
-
-/* ════════════════════════════════════════════════════
-   PLAYER INFO
-   ════════════════════════════════════════════════════ */
-
-.player-info {
-    text-align: center;
-    flex-shrink: 0;
-}
-
-.player-name {
-    font-family: var(--font-display);
-    font-size: 1.4rem;
-    font-weight: 900;
-    color: var(--gold);
-    letter-spacing: 3px;
-    text-shadow: 0 0 20px rgba(212,175,55,0.6), 0 2px 4px rgba(0,0,0,0.8);
-    line-height: 1;
-    margin-bottom: 4px;
-}
-
-.player-tag {
-    font-family: var(--font-body);
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: rgba(212,175,55,0.6);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-}
-
-/* ════════════════════════════════════════════════════
-   ACTIVE POKEMON
-   ════════════════════════════════════════════════════ */
-
-.active-section {
-    width: 100%;
-    flex-shrink: 0;
-}
-
-.active-label {
-    font-family: var(--font-display);
-    font-size: 0.6rem;
-    font-weight: 700;
-    color: rgba(212,175,55,0.5);
-    letter-spacing: 3px;
-    text-align: center;
-    margin-bottom: 8px;
-}
-
-.active-pokemon {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(212,175,55,0.05);
-    border: 1px solid rgba(212,175,55,0.2);
-    border-radius: 10px;
-    padding: 8px 10px;
-}
-
-.active-sprite {
-    width: 52px;
-    height: 52px;
-    flex-shrink: 0;
-    background: radial-gradient(circle, rgba(212,175,55,0.1), transparent 70%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.active-sprite img {
-    width: 46px;
-    height: 46px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.7));
-}
-
-.active-details {
-    flex: 1;
-    min-width: 0;
-}
-
-.active-name {
-    font-family: var(--font-display);
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--gold-light);
-    letter-spacing: 0.5px;
-    margin-bottom: 6px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.hp-bar-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.hp-bar-track {
-    height: 6px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 3px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.06);
-}
-
-.hp-bar-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                background-color 0.4s ease;
-    position: relative;
-}
-
-.hp-bar-fill::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 50%;
-    background: rgba(255,255,255,0.25);
-    border-radius: 3px 3px 0 0;
-}
-
-.hp-high     { background: var(--hp-high); box-shadow: 0 0 6px rgba(76,222,122,0.5); }
-.hp-mid      { background: var(--hp-mid);  box-shadow: 0 0 6px rgba(240,192,64,0.5); }
-.hp-low      { background: var(--hp-low);  box-shadow: 0 0 6px rgba(255,107,53,0.5); }
-.hp-critical {
-    background: var(--hp-crit);
-    box-shadow: 0 0 8px rgba(232,57,42,0.7);
-    animation: hp-pulse 0.8s ease-in-out infinite alternate;
-}
-
-@keyframes hp-pulse {
-    from { box-shadow: 0 0 4px rgba(232,57,42,0.5); }
-    to   { box-shadow: 0 0 14px rgba(232,57,42,0.9); }
-}
-
-.hp-text {
-    font-family: var(--font-body);
-    font-size: 0.68rem;
-    font-weight: 600;
-    color: rgba(255,255,255,0.55);
-    letter-spacing: 0.5px;
-}
-
-.hp-sep { margin: 0 2px; opacity: 0.4; }
-
-
-
-
-
-/* ════════════════════════════════════════════════════
-   BENCH CARDS — outside panels
-   ════════════════════════════════════════════════════ */
-
+/* ── Bench Section ── */
 .bench-section {
     position: fixed;
     top: 50%;
@@ -428,17 +128,8 @@ body {
     z-index: 900;
 }
 
-/* P1: bench cards left, active spot on the RIGHT */
-.bench-p1 {
-    left: 248px;
-    flex-direction: row;
-}
-
-/* P2: bench cards right, active spot on the LEFT (row-reverse flips order) */
-.bench-p2 {
-    right: 248px;
-    flex-direction: row-reverse;
-}
+.bench-p1 { left: 248px;  flex-direction: row; }
+.bench-p2 { right: 248px; flex-direction: row-reverse; }
 
 .bench-label {
     font-family: var(--font-display);
@@ -458,17 +149,17 @@ body {
     align-items: center;
 }
 
+/* ── Bench Cards ── */
 .bench-card {
-    width: 52px;
-    height: 72px;
+    width: 65px;
+    height: 88px;
     border-radius: 5px;
     border: 1.5px solid var(--gold-dim);
-    background: linear-gradient(135deg,
-        rgba(212,175,55,0.08) 0%,
-        rgba(10,10,22,0.75) 100%);
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(10,10,22,0.75) 100%);
     position: relative;
     transition: all 0.25s ease;
-    transform: rotate(90deg);
+    cursor: pointer;
+    overflow: hidden;
 }
 
 .bench-card::after {
@@ -479,27 +170,31 @@ body {
     border: 1px solid rgba(212,175,55,0.15);
 }
 
+.bench-p1 .bench-card       { transform: rotate(90deg); }
+.bench-p2 .bench-card       { transform: rotate(-90deg); }
+.bench-p1 .bench-card:hover { transform: rotate(90deg)  scaleX(1.05); }
+.bench-p2 .bench-card:hover { transform: rotate(-90deg) scaleX(1.05); }
+
 .bench-card:hover {
     border-color: var(--gold);
     background: rgba(212,175,55,0.14);
-    transform: rotate(90deg) scaleX(1.05);
     box-shadow: 0 0 10px rgba(212,175,55,0.25);
 }
 
-/* Active spot */
+/* ── Active Spot ── */
 .active-spot {
-    width: 72px;
-    height: 90px;
+    width: 88px;
+    height: 110px;
     border-radius: 6px;
     border: 1.5px solid var(--gold);
-    background: linear-gradient(135deg,
-        rgba(212,175,55,0.14) 0%,
-        rgba(10,10,22,0.85) 100%);
+    background: linear-gradient(135deg, rgba(212,175,55,0.14) 0%, rgba(10,10,22,0.85) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     position: relative;
+    cursor: pointer;
+    overflow: hidden;
     box-shadow: 0 0 12px rgba(212,175,55,0.2);
 }
 
@@ -511,50 +206,71 @@ body {
     border: 1px solid rgba(212,175,55,0.25);
 }
 
-.active-spot-label {
+.active-spot:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 16px rgba(212,175,55,0.45);
+}
+
+.bench-p1 .active-spot { transform: rotate(90deg); }
+.bench-p2 .active-spot { transform: rotate(-90deg); }
+
+/* ── Card Sprite ── */
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-sprite {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.7));
+}
+
+.bench-p1 .bench-card .card-sprite,
+.bench-p1 .active-spot .card-sprite { transform: rotate(-90deg); }
+
+.bench-p2 .bench-card .card-sprite,
+.bench-p2 .active-spot .card-sprite { transform: rotate(90deg); }
+
+/* ── Hover label ── */
+.card-overlay-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.75));
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: rotate(-90deg);
+    transform-origin: center bottom;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.bench-p2 .card-overlay-info { transform: rotate(90deg); transform-origin: center bottom; }
+
+.bench-card:hover .card-overlay-info,
+.active-spot:hover .card-overlay-info { opacity: 1; }
+
+.card-name-tag {
     font-family: var(--font-display);
-    font-size: 0.65rem;
+    font-size: 0.45rem;
     font-weight: 700;
     color: var(--gold);
-    letter-spacing: 1px;
-    text-align: center;
-    text-transform: uppercase;
-    line-height: 1.6;
-    text-shadow: 0 0 10px rgba(212,175,55,0.5);
+    white-space: nowrap;
 }
 
-/* P1 active spot: 90deg clockwise (right) */
-.bench-p1 .active-spot {
-    transform: rotate(90deg);
+.card-hp-tag {
+    font-size: 0.4rem;
+    color: rgba(255,255,255,0.7);
 }
 
-/* P2 active spot: 90deg counter-clockwise (left) */
-.bench-p2 .active-spot {
-    transform: rotate(-90deg);
-}
-
-@keyframes slideInLeft {
-    from { transform: translateX(-100%); opacity: 0; }
-    to   { transform: translateX(0);    opacity: 1; }
-}
-
-@keyframes slideInRight {
-    from { transform: translateX(100%); opacity: 0; }
-    to   { transform: translateX(0);    opacity: 1; }
-}
-
-@keyframes fadeDown {
-    from { transform: translate(-50%, -20px); opacity: 0; }
-    to   { transform: translate(-50%, 0);     opacity: 1; }
-}
-
-.panel-left  { animation: slideInLeft  0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1) both; }
-.panel-right { animation: slideInRight 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1) 0.1s both; }
-
-/* ════════════════════════════════════════════════════
-   SCROLLBAR (overlay frame)
-   ════════════════════════════════════════════════════ */
-
+/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 4px; }
