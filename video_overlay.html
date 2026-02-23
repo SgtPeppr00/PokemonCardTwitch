@@ -3,72 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Card Overlay</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="video_overlay.css?v=2">
+    <title>Pokemon TCG Tournament Overlay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
+    <link rel="stylesheet" href="video_overlay.css">
 </head>
 <body>
-    <!-- Pokemon Card Overlay -->
-    <div id="cardOverlay" class="card-overlay">
-        <div class="overlay-backdrop"></div>
-        <div class="overlay-frame">
-            <!-- Close button -->
-            <button class="overlay-close" id="overlayClose">&times;</button>
 
-            <!--Language selector-->
-            <div class="language-toggle">
-                <button id="langEn" class="lang-btn active" onclick="setLanguage('en')">EN</button>
-                <button id="langFr" class="lang-btn" onclick="setLanguage('fr')">FR</button>
+    <!-- PLAYER 1 — LEFT PANEL -->
+    <div class="player-panel panel-left" id="panel-p1">
+        <div class="panel-inner">
+            <div class="corner-tl"></div>
+            <div class="corner-bl"></div>
+            <div class="player-badge badge-left">
+                <span class="badge-label">P1</span>
             </div>
-
-            <!-- Card Image -->
-            <div class="overlay-image">
-                <img id="overlayCardImage" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Pokemon">
-                <div class="image-border"></div>
-            </div>
-            
-            <!-- Card Name -->
-            <h2 class="overlay-card-name" id="overlayCardName">Pikachu</h2>
-            
-            <!-- Pokeball Divider -->
-            <div class="pokeball-divider">
-                <div class="pokeball-icon-small"></div>
-            </div>
-
-            <div class="tab-container">
-                <button class="tab-button active" id="tabStats" onclick="showTab('stats')">Stats</button>
-                <button class="tab-button" id="tabAbilities" onclick="showTab('abilities')">Type & Abilities</button>
-            </div>
-
-            <div id="statsSection" class="tab-content active">
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-label">HP</div>
-                        <div class="stat-value" id="overlayStat1">0</div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="abilitiesSection" style="display:none;">
-                <div class="abilities-section">
-                    <div class="type-badge" id="overlayType">
-                        <span class="type-name">Electric</span>
-                    </div>
-                    <div class="abilities-list" id="overlayAbilities">
-                        <div class="ability-item">
-                            <span class="ability-name">Static</span>
-                            <span class="ability-desc">May paralyze opponents on contact</span>
-                        </div>
-                        <div class="ability-item">
-                            <span class="ability-name">Lightning Rod</span>
-                            <span class="ability-desc">Draws in all Electric-type moves</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="card-detail hidden" id="detail-p1">
+                <button class="detail-close" onclick="closeDetail('p1')">✕</button>
+                <img class="detail-img" id="detail-p1-img" src="" alt="">
+                <div class="detail-name" id="detail-p1-name"></div>
+                <div class="detail-type" id="detail-p1-type"></div>
+                <div class="detail-hp" id="detail-p1-hp"></div>
             </div>
         </div>
     </div>
 
-    <script src="video_overlay_api.js?v=2"></script>
+    <!-- BENCH P1 -->
+    <div class="bench-section bench-p1">
+        <div class="bench-label">BENCH</div>
+        <div class="bench-cards" id="bench-p1-cards"></div>
+        <div class="active-spot" id="active-p1"></div>
+    </div>
+
+    <!-- BENCH P2 -->
+    <div class="bench-section bench-p2">
+        <div class="bench-label">BENCH</div>
+        <div class="bench-cards" id="bench-p2-cards"></div>
+        <div class="active-spot" id="active-p2"></div>
+    </div>
+
+    <!-- PLAYER 2 — RIGHT PANEL -->
+    <div class="player-panel panel-right" id="panel-p2">
+        <div class="panel-inner">
+            <div class="corner-tr"></div>
+            <div class="corner-br"></div>
+            <div class="player-badge badge-right">
+                <span class="badge-label">P2</span>
+            </div>
+            <div class="card-detail hidden" id="detail-p2">
+                <button class="detail-close" onclick="closeDetail('p2')">✕</button>
+                <img class="detail-img" id="detail-p2-img" src="" alt="">
+                <div class="detail-name" id="detail-p2-name"></div>
+                <div class="detail-type" id="detail-p2-type"></div>
+                <div class="detail-hp" id="detail-p2-hp"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="video_overlay.js"></script>
 </body>
 </html>
