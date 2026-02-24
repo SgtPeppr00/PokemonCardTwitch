@@ -2,63 +2,35 @@
 //  POKEMON TCG TOURNAMENT OVERLAY — JS
 // ════════════════════════════════════════════════════
 
-const POKEMON = {
-    pikachu:   { name: 'Pikachu',   hp: 60,  img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png' },
-    charizard: { name: 'Charizard', hp: 250, img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png' },
-    blastoise: { name: 'Blastoise', hp: 200, img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png' },
-    venusaur:  { name: 'Venusaur',  hp: 190, img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png' },
-    mewtwo:    { name: 'Mewtwo',    hp: 230, img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png' },
-    gengar:    { name: 'Gengar',    hp: 130, img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png' },
-    dragonite: { name: 'Dragonite', hp: 220, img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png' },
-    lucario:   { name: 'Lucario',   hp: 150, img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/448.png' },
-    eevee:     { name: 'Eevee',     hp: 60,  img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png' },
-    snorlax:   { name: 'Snorlax',   hp: 320, img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/143.png' },
-    gyarados:  { name: 'Gyarados',  hp: 180, img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/130.png' },
-    alakazam:  { name: 'Alakazam',  hp: 120, img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/65.png' },
-};
+// ── Card Detail ───────────────────────────────────────
+function showDetail(player, pokemon) {
+    const placeholder = document.querySelector(`#detail-${player} .detail-placeholder`);
+    const content     = document.getElementById(`detail-${player}-content`);
+    const img         = document.getElementById(`detail-${player}-img`);
+    const name        = document.getElementById(`detail-${player}-name`);
+    const hp          = document.getElementById(`detail-${player}-hp`);
 
-const matchData = {
-    p1: {
-        active: POKEMON.pikachu,
-        bench: [POKEMON.charizard, POKEMON.blastoise, POKEMON.venusaur, POKEMON.lucario, POKEMON.eevee],
-    },
-    p2: {
-        active: POKEMON.mewtwo,
-        bench: [POKEMON.gengar, POKEMON.dragonite, POKEMON.snorlax, POKEMON.gyarados, POKEMON.alakazam],
-    }
-};
+    img.src          = pokemon.img;
+    name.textContent = pokemon.name;
+    hp.textContent   = pokemon.hp + ' HP';
 
-function renderBench(player) {
-    const data = matchData[player];
-
-    const activeEl = document.getElementById(`active-${player}`);
-    if (activeEl) activeEl.innerHTML = buildCardHTML(data.active);
-
-    const benchEl = document.getElementById(`bench-${player}-cards`);
-    if (benchEl) {
-        benchEl.innerHTML = data.bench
-            .map(p => `<div class="bench-card">${buildCardHTML(p)}</div>`)
-            .join('');
-    }
+    placeholder.classList.add('hidden');
+    content.classList.remove('hidden');
+    content.classList.add('visible');
 }
 
-function buildCardHTML(pokemon) {
-    return `
-        <div class="card-inner">
-            <img class="card-sprite" src="${pokemon.img}" alt="${pokemon.name}">
-            <div class="card-overlay-info">
-                <span class="card-name-tag">${pokemon.name}</span>
-                <span class="card-hp-tag">${pokemon.hp} HP</span>
-            </div>
-        </div>
-    `;
+function closeDetail(player) {
+    const placeholder = document.querySelector(`#detail-${player} .detail-placeholder`);
+    const content     = document.getElementById(`detail-${player}-content`);
+
+    content.classList.remove('visible');
+    content.classList.add('hidden');
+    placeholder.classList.remove('hidden');
 }
 
+// ── Twitch ────────────────────────────────────────────
 function applyStateUpdate(patch) {
-    if (patch.p1) Object.assign(matchData.p1, patch.p1);
-    if (patch.p2) Object.assign(matchData.p2, patch.p2);
-    renderBench('p1');
-    renderBench('p2');
+    // Reserved for future PubSub state updates
 }
 
 function init() {
@@ -73,8 +45,6 @@ function init() {
             } catch(e) {}
         });
     }
-    renderBench('p1');
-    renderBench('p2');
 }
 
 if (document.readyState === 'loading') {
